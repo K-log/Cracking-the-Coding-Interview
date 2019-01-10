@@ -67,3 +67,5 @@ fabric.properties
 \.idea/
 
 Cracking-the-Coding-Interview\.iml
+
+\.DS_Store
