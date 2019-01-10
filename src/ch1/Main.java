@@ -1,3 +1,5 @@
+package ch1;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -11,7 +13,7 @@ public class Main {
         System.out.println("<====Test Permutation====>");
         System.out.println(IsPermutation.testPermutation("test", "fail"));
         System.out.println(IsPermutation.testPermutation("test", "sett"));
-        System.out.println("<====Test Urlify====>");
+        System.out.println("<====Test ch1.Urlify====>");
         System.out.println(Urlify.makeUrl("Hello World! This is a test!"));
     }
 }

@@ -1,3 +1,5 @@
+package ch1;
+
 class PalPermute {
     // 1.4 - Find all permutations of palindromes derived from a given string.
 

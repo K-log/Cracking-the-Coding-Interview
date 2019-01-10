@@ -1,3 +1,5 @@
+package ch1;
+
 class Urlify {
     // 1.3 - Convert a string to a URL viable string.
 
