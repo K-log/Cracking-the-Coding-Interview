@@ -41,7 +41,7 @@ int main(){
     tests =  IsUniqueDS("test") ? "True" : "False"; 
     printf("test = %s\n", tests);
     tests = IsUnique("Name") ? "True" : "False";
-    printf("Name = %s\n", tests);
+    printf("Name = %s\n\n", tests);
 
     
     printf("Testing IsUniqueDS with another datastructure.\n");
