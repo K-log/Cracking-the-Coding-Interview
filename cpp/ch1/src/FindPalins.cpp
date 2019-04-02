@@ -13,9 +13,10 @@
 using namespace std;
 
 bool IsPalin(string s){ 
-    int j = s.size() - 1;
+    int j = s.size();
     if(j % 2 == 0){
         // Case for even strings
+        cout << s.size() << '\n';
         for(int i = 0; i < s.size()/2; i++){
             if(s[i] != s[j]){
                 return false;
@@ -23,6 +24,8 @@ bool IsPalin(string s){
             j--;
         }
     } else {
+        // Case for odd strings
+        //cout << s.size() << '\n';
         for(int i = 0; i < j; i++){
             if(s[i] != s[j]){
                 return false;
