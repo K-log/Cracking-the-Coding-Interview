@@ -13,19 +13,21 @@
 using namespace std;
 
 bool IsPalin(string s){ 
+    // Remove whitespace
+    s.erase(remove(s.begin(), s.end(), ' '), s.end());
     int j = s.size();
     if(j % 2 == 0){
         // Case for even strings
-        cout << s.size() << '\n';
-        for(int i = 0; i < s.size()/2; i++){
-            if(s[i] != s[j]){
+        // TODO: Fix broken end case
+        for(int i = 0; i < (s.size()/2); ++i){
+            if(s[i] != s[j] && i < j){
                 return false;
             }
-            j--;
+            --j;
         }
     } else {
+        j--;
         // Case for odd strings
-        //cout << s.size() << '\n';
         for(int i = 0; i < j; i++){
             if(s[i] != s[j]){
                 return false;
@@ -39,8 +41,8 @@ bool IsPalin(string s){
 void FindPalins(string s){
     sort(s.begin(), s.end());
     do {
-        //cout << s << '\n';
         if(IsPalin(s)){
+            cout << "True: ";
             cout << s << '\n';
         }
 
@@ -51,11 +53,19 @@ void FindPalins(string s){
 
 int main(){
     printf("Running FindPalins with two strings.\n");
-    string tests = "taco cat";
+    string tests = "tact coa";
     printf("taco cat: \n");
-    
     FindPalins(tests);
-    //const char* t = IsPalin("abc cba") ? "true" : "false";
-    //printf("IsPalin: %s\n", t);
+
+    tests = "aab bcc";
+    printf("aab bcc: \n");
+    FindPalins(tests);
+
+    /*
+    const char* t = IsPalin("taco cat") ? "true" : "false";
+    printf("IsPalin odd: %s\n", t);
+    t = IsPalin("abccba") ? "true" : "false";
+    printf("IsPalin even: %s\n", t);
+    */
     return 1; 
 }
