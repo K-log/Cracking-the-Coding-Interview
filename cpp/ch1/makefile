@@ -2,7 +2,7 @@ CC= gcc
 CXX= g++
 CXXFLAGS= --std=c++11
 
-all: clean isUnique.o checkPerm.o urlify.o findPalins.o
+all: clean isUnique.o checkPerm.o urlify.o findPalins.o oneAway.o
 
 isUnique.o: ./src/IsUnique.cpp
 	$(CXX) $(CXXFLAGS) ./src/IsUnique.cpp -o isUnique
@@ -15,6 +15,9 @@ urlify.o: ./src/Urlify.cpp
 
 findPalins.o: ./src/FindPalins.cpp
 	$(CXX) $(CXXFLAGS) ./src/FindPalins.cpp -o findPalins
+
+oneAway.o: ./src/OneAway.cpp
+	$(CXX) $(CXXFLAGS) ./src/OneAway.cpp -o oneAway
 
 clean:
 	rm -f isUnique checkPerm urlify findPalins
