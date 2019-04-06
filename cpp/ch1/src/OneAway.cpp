@@ -1,10 +1,9 @@
 /**
- *
  * CCI Ch1.5
  *
  * Noah
  *
- * Check if two string are one value away from each other
+ * Check if two string are one value away from each other.
  *
  */
 
