@@ -12,9 +12,14 @@
 using namespace std;
 
 bool IsUnique(string s){    
-    for(int i = 0; i < s.size(); i++){
-        int j = 0;
-        while(j < s.size()){
+    if(s.size() > 128) { // If we use more than have the ascii character set then one value must have been repeated.
+        return false;
+    }
+
+
+    for(int i = 0; i < s.size(); i++){ // O(n)
+        int j = i+1;
+        while(j < s.size()){           // O(n) 
             if(j != i && s[j] == s[i]){
                 return false;
             }
@@ -25,7 +30,7 @@ bool IsUnique(string s){
 }
 
 bool IsUniqueDS(string s){
-    set<char> temp (s.begin(), s.end());
+    set<char> temp (s.begin(), s.end()); //O(n)
 
     if(s.size() > temp.size()){
         return false;

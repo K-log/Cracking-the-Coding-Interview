@@ -14,10 +14,10 @@ using namespace std;
 
 
 string Urlify(string s){ 
-    string out;
-    for(int i = 0; i != s.size(); i++){
-        if(s[i] == ' '){
-            out.push_back('%');
+    string out; // Size n
+    for(int i = 0; i != s.size(); i++){ // O(n)
+        if(s[i] == ' '){ // O(1)
+            out.push_back('%'); // O(1)
             out.push_back('2');
             out.push_back('0');
         } else {

@@ -17,7 +17,7 @@ using namespace std;
 
 
 bool isSubstring(string s1, string s2){ 
-    return s1.find(s2) ? true : false;
+    return s1.find(s2, 0) ? true : false;
 }
 
 void RotString(string s1, string s2){    
