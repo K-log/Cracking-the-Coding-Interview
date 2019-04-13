@@ -25,6 +25,7 @@ void LinkedList::insert(int d) {
 }
 
 void LinkedList::del(int d) {
+    // Linear time complexity, Constant space.
     if(len == 0) {
         std::fprintf(stderr, "List empty! Nothing to delete.\n");
         return;
@@ -45,21 +46,47 @@ void LinkedList::del(int d) {
 }
 
 void LinkedList::print() {
+    // Linear time complexity, Constant space.
     std::shared_ptr<node> curr = head;
-    int l = 0;
-    while(curr != nullptr) {
+    int l = 0; 
+    while(curr != nullptr) { // O(n)
         std::printf("Loc: %d -> %d\n", l, curr->data);
         curr = curr->next; 
         l++;
     }
 }
 
-int LinkedList::findK(int k) {
+void LinkedList::remDups() {
+    // Linear time complexity (worst case quadratic), Linear space.
+    std::unordered_set<int> allNodes;
     std::shared_ptr<node> curr = head;
-    int totalLen = 0;
-    int l = 0;
+    while(curr != tail) {
+        printf("%d\n", curr->data);
+        if(!std::get<1>(allNodes.insert(curr->data))){
+            curr->prev->next = curr->next;
+            curr->next->prev = curr->prev;
+            if(tail == curr){
+                tail = curr->prev;
+            }
+        }
+        curr = curr->next;
+    }
     
-    while(curr != nullptr) {
+    if(!std::get<1>(allNodes.insert(curr->data))){
+        curr->prev->next = nullptr;
+        if(tail == curr){
+            tail = curr->prev;
+        }
+    }
+}
+
+int LinkedList::findK(int k) {
+    // Quadratic time complexity, Constant space.
+    std::shared_ptr<node> curr = head; // O(1)
+    int totalLen = 0; // O(1)
+    int l = 0;        // O(1)
+    
+    while(curr != nullptr) { // O(n)
         curr = curr->next;
         totalLen++;
     }
@@ -69,7 +96,7 @@ int LinkedList::findK(int k) {
     }
 
     curr = head;
-    while(curr != nullptr && l < totalLen-k){
+    while(curr != nullptr && l < totalLen-k){ // O(n)
         if(l == len-k){
             return curr->data;
         }
@@ -82,12 +109,13 @@ int LinkedList::findK(int k) {
 
 
 int LinkedList::findKalt(int k) {
+    // Linear time complexity, Constant space.
     if(len-k < 0) {
         return -1;
     }
-    std::shared_ptr<node> curr = head;
-    int l = 0;
-    while(curr != nullptr){
+    std::shared_ptr<node> curr = head; // Size O(1)
+    int l = 0; // Size O(1)
+    while(curr != nullptr){ // O(n)
         if(l == len-k){
             return curr->data;
         }

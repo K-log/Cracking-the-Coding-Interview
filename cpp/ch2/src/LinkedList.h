@@ -1,7 +1,9 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
-#include<memory>
+#include <memory>
 #include <iostream>
+#include <unordered_set>
+#include <utility>
 
 // LinkedList Class
 //
@@ -27,9 +29,12 @@ class LinkedList {
         void del(int n);
         //void makeEmpty();
         void print();
+        void remDups();
         int findK(int k);
         int findKalt(int k);
         int length();
+       // void delMid(int d);
+
 
     private: 
         struct node {

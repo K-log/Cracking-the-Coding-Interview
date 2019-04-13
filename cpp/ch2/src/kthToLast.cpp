@@ -11,7 +11,7 @@
 #include "LinkedList.h"
 
 int main() {
-    printf("Finding 3rd to last element in the list.\n");
+    printf("Testing find kth to last element in the list.\n");
     LinkedList lList(0);
     lList.insert(1);
     lList.insert(2);
@@ -22,7 +22,7 @@ int main() {
     lList.insert(7);
     lList.insert(8);
     lList.insert(9);
-    printf("Value in full list are: \n");
+    printf("Values in full list are: \n");
     lList.print();
 
     printf("Finding 3rd from the end: %d\n", lList.findK(3));

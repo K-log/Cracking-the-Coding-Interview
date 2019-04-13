@@ -3,13 +3,13 @@ CXX= g++
 CXXFLAGS= --std=c++11
 INCLUDES=./src/LinkedList.cpp
 
-all: clean RemDup.o
+all: clean RemDups.o KthToLast.o
 
-RemDup.o: ./src/remDup.cpp
-	$(CXX) $(CXXFLAGS) ./src/remDup.cpp -o RemDup
+RemDups.o: ./src/remDups.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) ./src/remDups.cpp -o RemDups
 
 KthToLast.o: ./src/kthToLast.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) ./src/kthToLast.cpp -o KthToLast
 
 clean:
-	rm -f RemDup 
+	rm -f RemDups KthToLast 
