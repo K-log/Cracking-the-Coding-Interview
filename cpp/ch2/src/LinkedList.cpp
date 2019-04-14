@@ -24,6 +24,14 @@ void LinkedList::insert(int d) {
     len++;
 }
 
+void LinkedList::insert(std::shared_ptr<node> n) {
+    tail->next = n;
+    n->prev = tail;
+    n->next = nullptr;
+    tail = n;
+
+}
+
 void LinkedList::del(int d) {
     // Linear time complexity, Constant space.
     if(len == 0) {
@@ -45,6 +53,23 @@ void LinkedList::del(int d) {
     len--;
 }
 
+void LinkedList::del(std::shared_ptr<node> n) {
+    n->prev->next = n->next;
+    n->next->prev = n->prev;
+}
+
+
+
+std::shared_ptr<LinkedList::node> LinkedList::find(int d) { 
+    // Returns either a pointer to node d or nullptr
+    std::shared_ptr<node> curr = head;
+    while(curr->data != d && curr != tail) {
+        curr = curr->next;
+    }
+    return curr;
+}
+
+
 void LinkedList::print() {
     // Linear time complexity, Constant space.
     std::shared_ptr<node> curr = head;
@@ -54,6 +79,7 @@ void LinkedList::print() {
         curr = curr->next; 
         l++;
     }
+    std::printf("\n");
 }
 
 void LinkedList::remDups() {
@@ -71,7 +97,7 @@ void LinkedList::remDups() {
         }
         curr = curr->next;
     }
-    
+    // Catch the last element and a void a seg fault 
     if(!std::get<1>(allNodes.insert(curr->data))){
         curr->prev->next = nullptr;
         if(tail == curr){
@@ -129,4 +155,56 @@ int LinkedList::findKalt(int k) {
 
 int LinkedList::length() {
     return len;
+} 
+
+void LinkedList::delMid(int d){
+    // Asside from getting pointer to the node this is linear time complexity
+    std::shared_ptr<node> n = find(d); // O(n)
+    if(n == head || n == tail){
+        return;
+    }
+    std::shared_ptr<node> curr = head; 
+    while(curr->next != n) { // O(n)
+        curr = curr->next;
+    }
+
+    curr->next = n->next;
+}
+
+
+void LinkedList::delMidD(int d){
+    // Asside from getting pointer to the node this is constant time complexity
+    std::shared_ptr<node> n = find(d); // O(n)
+    if(n == head || n == tail){
+        return;
+    } 
+    n->next->prev = n->prev;
+    n->prev->next = n->next;
+}
+
+void LinkedList::swap(std::shared_ptr<node> n1, std::shared_ptr<node> n2) {
+    int temp = n1->data;
+    n1->data = n2->data;
+    n2->data = temp;
+}
+
+void LinkedList::partition(int d) {
+    std::shared_ptr<node> curr = head;    
+    std::shared_ptr<node> end = tail;    
+    std::shared_ptr<node> temp; 
+
+    while(curr != end) {
+        printf("%d-", curr->data);
+        if(curr->data > d){
+            printf("HERE");
+            temp = curr;
+            printf("HERE");
+            del(curr);        // O(1)
+            printf("HERE\n");
+            insert(temp->data); // O(1)
+            curr = temp->next;
+        } else { 
+            curr = curr->next;
+        }
+    } 
 } 

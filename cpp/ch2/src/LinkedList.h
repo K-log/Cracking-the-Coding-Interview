@@ -22,20 +22,6 @@
 
 
 class LinkedList { 
-    public: 
-        LinkedList(int d);
-        ~LinkedList();
-        void insert(int n);
-        void del(int n);
-        //void makeEmpty();
-        void print();
-        void remDups();
-        int findK(int k);
-        int findKalt(int k);
-        int length();
-       // void delMid(int d);
-
-
     private: 
         struct node {
             int data;
@@ -51,7 +37,25 @@ class LinkedList {
         std::shared_ptr<node> head = nullptr;
         std::shared_ptr<node> tail = nullptr;
         int len;
-        //node getnodeReverse(int index);
-        //node getnodeForward(int index);
+
+    public: 
+        LinkedList(int d);
+        ~LinkedList();
+        void insert(int d);
+        void insert(std::shared_ptr<node> n);
+        void del(int d);
+        void del(std::shared_ptr<node> n);
+        std::shared_ptr<node> find(int d);
+        void print();
+        void remDups();
+        int findK(int k);
+        int findKalt(int k);
+        int length();
+        void delMid(int d);
+        void delMidD(int d);
+        void swap(std::shared_ptr<node> n1, std::shared_ptr<node> n2);
+        void partition(int d);
+
+
 };
 #endif
