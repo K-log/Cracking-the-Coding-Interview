@@ -1,10 +1,16 @@
 #include "LinkedList.h"
 
+
+LinkedList::LinkedList(){
+    printf("Init new list\n");
+    len = 0;
+}
+
 LinkedList::LinkedList(int d){
     std::shared_ptr<node> newNode(new node(d));
     head = newNode; 
     tail = newNode;
-    len = 0;
+    len = 1;
 }
 
 LinkedList::~LinkedList(){
@@ -19,8 +25,13 @@ LinkedList::~LinkedList(){
 
 void LinkedList::insert(int d) {
     std::shared_ptr<node> newNode(new node(d, tail)); 
-    tail->next = newNode;
-    tail = newNode;
+    if(tail == nullptr || head == nullptr) {
+        head = newNode;
+        tail = newNode;
+    } else {
+        tail->next = newNode;
+        tail = newNode;
+    }
     len++;
 }
 
@@ -75,7 +86,7 @@ void LinkedList::print() {
     std::shared_ptr<node> curr = head;
     int l = 0; 
     while(curr != nullptr) { // O(n)
-        std::printf("Loc: %d -> %d\n", l, curr->data);
+        std::printf("Index: %d -> %d\n", l, curr->data);
         curr = curr->next; 
         l++;
     }
@@ -123,7 +134,7 @@ int LinkedList::findK(int k) {
 
     curr = head;
     while(curr != nullptr && l < totalLen-k){ // O(n)
-        if(l == len-k){
+        if(l == len-k-1){
             return curr->data;
         }
         curr = curr->next;
@@ -136,13 +147,13 @@ int LinkedList::findK(int k) {
 
 int LinkedList::findKalt(int k) {
     // Linear time complexity, Constant space.
-    if(len-k < 0) {
+    if(len-k-1 < 0) {
         return -1;
     }
     std::shared_ptr<node> curr = head; // Size O(1)
     int l = 0; // Size O(1)
     while(curr != nullptr){ // O(n)
-        if(l == len-k){
+        if(l == len-k-1){
             return curr->data;
         }
         curr = curr->next;
@@ -182,29 +193,84 @@ void LinkedList::delMidD(int d){
     n->prev->next = n->next;
 }
 
-void LinkedList::swap(std::shared_ptr<node> n1, std::shared_ptr<node> n2) {
-    int temp = n1->data;
-    n1->data = n2->data;
-    n2->data = temp;
-}
-
 void LinkedList::partition(int d) {
+    // Quadratic time complexity and constant space
     std::shared_ptr<node> curr = head;    
     std::shared_ptr<node> end = tail;    
-    std::shared_ptr<node> temp; 
+    std::shared_ptr<node> bubbleTemp = head;
+    std::shared_ptr<node> part = curr;
+    int temp;
+    bool found = false;
 
-    while(curr != end) {
-        printf("%d-", curr->data);
-        if(curr->data > d){
-            printf("HERE");
-            temp = curr;
-            printf("HERE");
-            del(curr);        // O(1)
-            printf("HERE\n");
-            insert(temp->data); // O(1)
-            curr = temp->next;
-        } else { 
-            curr = curr->next;
+    while(curr != end) {  // O(n^2) 
+        if(curr->data == d && !found) {
+            part = curr;
+            found = true;
+        } else if(curr->data >= d) {
+            bubbleTemp = curr;
+            while(bubbleTemp->data >= d && bubbleTemp != end) { // O(n)
+                bubbleTemp = bubbleTemp->next;
+            }  
+            if(bubbleTemp != end){
+                temp = bubbleTemp->data;
+                bubbleTemp->data = curr->data;
+                curr->data = temp;
+            }
         }
+        curr = curr->next;
     } 
+    curr = part->next;
+    while(curr->data < d) { // O(n)
+        temp = part->data;
+        part->data = curr->data;
+        curr->data = temp;
+        part = curr;
+        curr = curr->next;
+    } 
+    printf("Partition complete!\n");
 } 
+
+std::shared_ptr<LinkedList::node> LinkedList::getStart() {
+    return head;
+}
+
+int LinkedList::listToDigitsReverse() {
+    // Linear time complexity and constant space.
+    std::shared_ptr<node> curr = head;
+    int num = 0;
+    int count = 0;
+    while(curr != nullptr) { // O(n)
+        num += (curr->data * std::pow(10, count));
+        //printf("%f\n", std::pow(10, count));
+        count++;
+        curr = curr->next; 
+    }
+    return num;
+}
+
+
+int LinkedList::listToDigits() {
+    // Linear time complexity and constant space.
+    std::shared_ptr<node> curr = head;
+    int num = 0;
+    int count = len-1;
+    while(curr != nullptr) { // O(n)
+        num += (curr->data * std::pow(10, count));
+        //printf("%f\n", std::pow(10, count));
+        count--;
+        curr = curr->next; 
+    }    
+    return num;
+}
+
+void LinkedList::intToList(int d) { 
+    // Linear time complexity.
+    // Insert a number into a list with the digits in the correct order.
+    if(d < 0) {
+        d = -1*d;
+    }
+    if(d/10 > 0) {
+        intToList(d/10);
+    }
+    insert(d%10);
+}

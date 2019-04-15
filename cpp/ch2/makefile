@@ -3,7 +3,7 @@ CXX= g++
 CXXFLAGS= --std=c++11
 INCLUDES=./src/LinkedList.cpp
 
-all: clean RemDups.o KthToLast.o DelMid.o Partition.o
+all: clean RemDups.o KthToLast.o DelMid.o Partition.o SumLists.o
 
 RemDups.o: ./src/remDups.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) ./src/remDups.cpp -o RemDups
@@ -17,5 +17,8 @@ DelMid.o: ./src/delMidNode.cpp
 Partition.o: ./src/partition.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) ./src/partition.cpp -o Partition
 
+SumLists.o: ./src/sumLists.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) ./src/sumLists.cpp -o SumLists
+
 clean:
-	rm -f RemDups KthToLast DelMid 
+	rm -f RemDups KthToLast DelMid Partition SumLists 

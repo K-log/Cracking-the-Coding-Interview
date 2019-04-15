@@ -1,24 +1,37 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
-#include <memory>
-#include <iostream>
-#include <unordered_set>
-#include <utility>
+#include <memory>        // shared_ptr
+#include <iostream>      // printf
+#include <unordered_set> // set
+#include <utility>       // pair 
+#include <math.h>        // pow
 
 // LinkedList Class
 //
 // CONSTRUCTION: zero parameter
 //
 // ******************PUBLIC OPERATIONS*********************
-// void insert( x )    --> Insert x, return True on success
-// void delete( x )    --> Remove x, return True on success
-// int length( )       --> Return length of list
-// void makeEmpty( )   --> Remove all list items
-// void print ( )      --> Print out the contents of the list
-// int findK()         --> Find the kth from the last element of the list
-// int findKalt()      --> Find the kth from the last element of the list using length
+// void insert( d )               --> Insert int d at the end of the list
+// void insert( n )               --> Insert node n at the end of the list
+// void delete( d )               --> Remove int d 
+// int length( )                  --> Return length of list
+// void makeEmpty( )              --> Remove all list items
+// void print ( )                 --> Print out the contents of the list
+// int findK( k )                 --> Find the kth from the last element of the list
+// int findKalt( k )              --> Find the kth from the last element of the list using length
+// void delMid( d )               --> Delete d from the list if d is not the head or tail
+// void delMidD( d )              --> Same as delMid except using the feature of a doubly linked list
+// void partition( d )            --> Partion the list around d with all values greater or equal on the right and all values less than on the left
+// std::shared_ptr<node> getStart --> Get a pointer to the start of the list
+// int listToDigits()             --> Returns the list as a single digit
+// int listToDigitsReverse()      --> Returns the list as a single digit in reverse
+// void inToList()                --> Inserts a number with the digits in the correct order
 // *******************ERRORS*******************************
 // NO ERRORS YET
+// *******************NOTES*******************************
+// Should have added iterators........
+// TODO: Add an iterator class
+
 
 
 class LinkedList { 
@@ -39,6 +52,7 @@ class LinkedList {
         int len;
 
     public: 
+        LinkedList();
         LinkedList(int d);
         ~LinkedList();
         void insert(int d);
@@ -53,9 +67,11 @@ class LinkedList {
         int length();
         void delMid(int d);
         void delMidD(int d);
-        void swap(std::shared_ptr<node> n1, std::shared_ptr<node> n2);
         void partition(int d);
-
+        std::shared_ptr<node> getStart();
+        int listToDigits();
+        int listToDigitsReverse();
+        void intToList(int d);
 
 };
 #endif
