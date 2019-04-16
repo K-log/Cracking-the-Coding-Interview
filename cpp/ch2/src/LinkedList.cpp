@@ -193,25 +193,25 @@ void LinkedList::delMidD(int d){
     n->prev->next = n->next;
 }
 
-void LinkedList::partition(int d) {
+void LinkedList::partitionStrict(int d) {
     // Quadratic time complexity and constant space
     std::shared_ptr<node> curr = head;    
-    std::shared_ptr<node> end = tail;    
+    //std::shared_ptr<node> end = tail;    
     std::shared_ptr<node> bubbleTemp = head;
     std::shared_ptr<node> part = curr;
     int temp;
     bool found = false;
 
-    while(curr != end) {  // O(n^2) 
+    while(curr != tail) {  // O(n^2) 
         if(curr->data == d && !found) {
             part = curr;
             found = true;
         } else if(curr->data >= d) {
             bubbleTemp = curr;
-            while(bubbleTemp->data >= d && bubbleTemp != end) { // O(n)
+            while(bubbleTemp->data >= d && bubbleTemp != tail) { // O(n)
                 bubbleTemp = bubbleTemp->next;
             }  
-            if(bubbleTemp != end){
+            if(bubbleTemp != tail){
                 temp = bubbleTemp->data;
                 bubbleTemp->data = curr->data;
                 curr->data = temp;
@@ -229,6 +229,20 @@ void LinkedList::partition(int d) {
     } 
     printf("Partition complete!\n");
 } 
+
+void LinkedList::partition(int d) {
+    std::shared_ptr<node> end = tail;
+    std::shared_ptr<node> curr = head;
+    
+    while(curr != end) {
+        if(curr->data >= d) {
+            insert(curr->data);
+            del(curr->data);
+        }
+        curr = curr->next; 
+    }
+}
+
 
 std::shared_ptr<LinkedList::node> LinkedList::getStart() {
     return head;
@@ -304,4 +318,3 @@ bool LinkedList::isPalin() {
     }
     return true;
 } 
-

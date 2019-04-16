@@ -25,9 +25,27 @@ int main() {
     printf("Values in full list are: \n");
     lList.print();
     
-    printf("Partition on 5: \n");
-    lList.partition(5);
+    printf("PartitionStrict on 5: \n");
+    lList.partitionStrict(5);
     lList.print();
     
+
+    LinkedList sList(0);
+    sList.insert(3);
+    sList.insert(5);
+    sList.insert(8);
+    sList.insert(5);
+    sList.insert(10);
+    sList.insert(2);
+    sList.insert(1);
+    sList.insert(8);
+    sList.insert(5);
+    printf("Values in full list are: \n");
+    sList.print();
+    
+    printf("Partition on 5: \n");
+    sList.partition(5);
+    sList.print();
+
     return 1;
 }

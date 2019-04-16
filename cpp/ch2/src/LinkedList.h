@@ -67,6 +67,7 @@ class LinkedList {
         int length();
         void delMid(int d);
         void delMidD(int d);
+        void partitionStrict(int d);
         void partition(int d);
         std::shared_ptr<node> getStart();
         int listToDigits();
