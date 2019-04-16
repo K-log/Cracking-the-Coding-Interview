@@ -3,7 +3,7 @@ CXX= g++
 CXXFLAGS= --std=c++11
 INCLUDES=./src/LinkedList.cpp
 
-all: clean RemDups.o KthToLast.o DelMid.o Partition.o SumLists.o
+all: clean RemDups.o KthToLast.o DelMid.o Partition.o SumLists.o IsPalin.o
 
 RemDups.o: ./src/remDups.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) ./src/remDups.cpp -o RemDups
@@ -20,5 +20,8 @@ Partition.o: ./src/partition.cpp
 SumLists.o: ./src/sumLists.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) ./src/sumLists.cpp -o SumLists
 
+IsPalin.o: ./src/isPalin.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) ./src/isPalin.cpp -o IsPalin
+
 clean:
-	rm -f RemDups KthToLast DelMid Partition SumLists 
+	rm -f RemDups KthToLast DelMid Partition SumLists IsPalin 

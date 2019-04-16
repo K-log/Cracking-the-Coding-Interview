@@ -274,3 +274,34 @@ void LinkedList::intToList(int d) {
     }
     insert(d%10);
 }
+
+bool LinkedList::isPalin() {
+    std::shared_ptr<node> fst = head; 
+    std::shared_ptr<node> snd = head;
+    int halfLen = (len%2==0 ? len/2 : (len-1)/2)-1;
+    int count = halfLen;
+    int tempL = (len%2==0 ? halfLen : ((len)/2)+1);
+    int index = 0;
+    int arr[halfLen];
+    while(count > -1 && index < len) {
+        if(index > tempL) {
+            arr[count] = snd->data;
+            printf("%d[%d]\n", arr[count], count);
+            count--;
+        }
+        index++;
+        snd = snd->next;
+    } 
+    
+    index = 0;
+    while(index < halfLen) {
+        printf("%d == %d[%d]\n", fst->data, arr[index], index); 
+        if(fst->data != arr[index]){
+            return false;
+        } 
+        fst = fst->next;
+        index++;
+    }
+    return true;
+} 
+

@@ -72,6 +72,7 @@ class LinkedList {
         int listToDigits();
         int listToDigitsReverse();
         void intToList(int d);
+        bool isPalin();
 
 };
 #endif
