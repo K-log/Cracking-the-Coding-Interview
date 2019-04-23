@@ -1,0 +1,18 @@
+To have a min function for a stack that runs in O(1), you need to alocate a second array to always hold the current min. Whenever you push a node you check to see if it is less than the current min and if so push that on the min stack. Otherewise, take the current head of the min stack and push it onto the min stack again. For pop, just removed the first node in the min and regular stack. To get the min just pop off the top value of the min stack.
+
+
+Stack    Min
+-----   -----
+0       0  <-- New min
+9       1 
+1       1  <-- New min
+8       2
+4       2
+5       2
+6       2
+2       2  <-- New min
+10      4
+20      4 
+4       4  <- Initial min
+
+
