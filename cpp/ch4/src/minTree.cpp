@@ -10,6 +10,7 @@
 #include <vector>
 #include <iostream>
 #include <cmath>
+#include <memory>
 using namespace std;
 
 
@@ -75,7 +76,7 @@ vector<int> arrToTree2(vector<int> in) {
     return out;
 }
 
-vector<int> arrToTree(int i, vector<int> arr) {
+vector<int> arrToTree(vector<int> arr) {
     
     if(arr.empty()) {
         //printf("No value left\n");
@@ -83,21 +84,24 @@ vector<int> arrToTree(int i, vector<int> arr) {
         return tree;
     }
 
-    int half = (int)floor(arr.size()/2);
-
-    if(arr.size() < 3) {
-        //printf("Only 1 value left\n");
-        if(arr.size() == 1) {
-            return arr; 
+    if(arr.size() == 2) {
+        if(arr[0] > arr[1]) {
+            return vector<int> {arr[0], -1, arr[1]};
         }
+            return vector<int> {arr[0], arr[1], -1};
+    }
+
+    if(arr.size() == 3) {
         if(arr[0] > arr[1]) {
             swap(arr[0], arr[1]); 
         }
         return arr;
     }
  
-    vector<int> right = arrToTree(i+1, vector<int>(arr.begin()+half+1, arr.end())); // recursively construct the right subtree
-    vector<int> left = arrToTree(i+2, vector<int>(arr.begin(), arr.begin()+half));  // recursively construct the left subtree
+    int half = (int)floor(arr.size()/2);
+
+    vector<int> right = arrToTree(vector<int>(arr.begin()+half+1, arr.end())); // recursively construct the right subtree
+    vector<int> left = arrToTree(vector<int>(arr.begin(), arr.begin()+half));  // recursively construct the left subtree
     
     printf("\nRoot: %d\n", arr[half]);
     printf("Left: ");
@@ -113,8 +117,28 @@ vector<int> arrToTree(int i, vector<int> arr) {
     vector<int> tree;                                       // Initialize the tree
     tree.reserve(left.size() + right.size() + 1);               // prealocate memory
     tree.push_back(arr[half]);                              // Insert the root val
-    tree.insert(tree.end(), left.begin(), left.end());      // Insert the left subtree
-    tree.insert(tree.end(), right.begin(), right.end());    // Insert the right subtree
+    int count = left.size() > right.size() ? left.size() : right.size();
+    int iter = 0;
+    int level = 0;
+    while(iter < count) {
+        if(iter < left.size()) {
+            for(int n = 0; n < level>>2; n++) {
+                tree.push_back(left[0]);
+                left.erase(left.begin());
+            }
+        }
+        if(iter < right.size()) {
+            for(int n = 0; n < level>>2; n++) {
+                tree.push_back(right[0]);
+                right.erase(right.begin());
+            }
+        }
+        iter += level>>2;
+        level++;
+    }
+
+    //tree.insert(tree.end(), left.begin(), left.end());      // Insert the left subtree
+    //tree.insert(tree.end(), right.begin(), right.end());    // Insert the right subtree
 
     printf("\nFull Tree: ");
     for(int i : tree) {
@@ -124,12 +148,53 @@ vector<int> arrToTree(int i, vector<int> arr) {
     return tree; 
 }
 
+class Node {
+    public:
+        int data;
+        shared_ptr<Node> left = nullptr;
+        shared_ptr<Node> right = nullptr;
+        Node(int d) {
+            data = d;
+        }
+};
+
+
+shared_ptr<Node> minTree(vector<int> arr, int start, int end) {
+    if(end < start) {
+        return nullptr;
+    }
+    int mid = (start + end) / 2;
+    shared_ptr<Node> root (new Node(arr[mid]));
+    root->left = minTree(arr, start, mid-1);
+    root->right = minTree(arr, mid+1, end);
+    
+    return root;
+}
+
+
+void printNodes(shared_ptr<Node> n) {
+    if(n == nullptr) {
+        return;
+    }
+   
+    printNodes(n->left);
+    printf("%d ", n->data);
+    printNodes(n->right);
+}
+
 int main() {
     printf("Testing Int Array to Binary Tree.\n");
-    vector<int> preTreeEven = {0,1,2,3,4,5,6,7,8,9,10,11,12,13};
-    vector<int> preTreeOdd = {0,1,2,3,4,5,6,7,8,9,10,11,12};
+    vector<int> preTreeEven = {0,1,2,3,4,5,6};
+    vector<int> preTreeOdd = {0,1,2,3,4,5};
 
-    vector<int> test = arrToTree2(preTreeOdd);
+    shared_ptr<Node> temp = minTree(preTreeEven, 0, preTreeEven.size()-1);
+    printNodes(temp);
+    printf("\n");
+    temp = minTree(preTreeOdd, 0, preTreeOdd.size()-1);
+    printNodes(temp);
+    printf("\n");
+    /*
+    vector<int> test = arrToTree(preTreeOdd);
     for(int i : preTreeOdd) {
         printf("%d ", i);
     }
@@ -139,7 +204,7 @@ int main() {
     }
     printf("\n\n");
     printf("Even Tree\n");
-    test = arrToTree2(preTreeEven);
+    test = arrToTree(preTreeEven);
     for(int i : preTreeEven) {
         printf("%d ", i);
     }
@@ -148,5 +213,6 @@ int main() {
         printf("%d ", i);
     }
     printf("\n\n");
+    */
     return 1;
 }
