@@ -193,26 +193,5 @@ int main() {
     temp = minTree(preTreeOdd, 0, preTreeOdd.size()-1);
     printNodes(temp);
     printf("\n");
-    /*
-    vector<int> test = arrToTree(preTreeOdd);
-    for(int i : preTreeOdd) {
-        printf("%d ", i);
-    }
-    printf("\n");
-    for(int i : test) {
-        printf("%d ", i);
-    }
-    printf("\n\n");
-    printf("Even Tree\n");
-    test = arrToTree(preTreeEven);
-    for(int i : preTreeEven) {
-        printf("%d ", i);
-    }
-    printf("\n");
-    for(int i : test) {
-        printf("%d ", i);
-    }
-    printf("\n\n");
-    */
     return 1;
 }

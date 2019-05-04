@@ -23,30 +23,30 @@
 |   2.1   |   C++    |   Done    |
 |   2.2   |   C++    |   Done    |
 |   2.3   |   C++    |   Done    |
-|   2.4   |   C++    |           |
-|   2.5   |   C++    |           |
-|   2.6   |   C++    |           |
-|   2.7   |   C++    |           |
-|   2.8   |   C++    |           |
+|   2.4   |   C++    |   Done    |
+|   2.5   |   C++    |   Done    |
+|   2.6   |   C++    |   Done    |
+|   2.7   |   C++    |   Done    |
+|   2.8   |   C++    |   Done    |
 
 ## Week 3 - Stacks and Queues
 
 | Problem | Language | Completed |
 | :-----: | :------: | :-------: |
-|   3.1   |   C++    |           |
-|   3.2   |   C++    |           |
-|   3.3   |   C++    |           |
-|   3.4   |   C++    |           |
-|   3.5   |   C++    |           |
-|   3.6   |   C++    |           |
+|   3.1   |   C++    |   Done    |
+|   3.2   |   C++    |   Done    |
+|   3.3   |   C++    |   Done    |
+|   3.4   |   C++    |   Done    |
+|   3.5   |   C++    |   Skip    |
+|   3.6   |   C++    |   Done    |
 
-## Week 4 - Trees and Graphs
+## Week 4 and 5 - Trees and Graphs and Testing
 
 | Problem | Language | Completed |
 | :-----: | :------: | :-------: |
-|   4.1   |   C++    |           |
-|   4.2   |   C++    |           |
-|   4.3   |   C++    |           |
+|   4.1   |   C++    |   Done    |
+|   4.2   |   C++    |   Done    |
+|   4.3   |   C++    |   Done    |
 |   4.4   |   C++    |           |
 |   4.5   |   C++    |           |
 |   4.6   |   C++    |           |
@@ -56,27 +56,12 @@
 |  4.10   |   C++    |           |
 |  4.11   |   C++    |           |
 |  4.12   |   C++    |           |
-
-## Week 5 - Math and Puzzles and Testing
-
-| Problem | Language | Completed |
-| :-----: | :------: | :-------: |
-|   6.1   |  Python  |           |
-|   6.2   |  Python  |           |
-|   6.3   |  Python  |           |
-|   6.4   |  Python  |           |
-|   6.5   |  Python  |           |
-|   6.6   |  Python  |           |
-|   6.7   |  Python  |           |
-|   6.8   |  Python  |           |
-|   6.9   |  Python  |           |
-|  6.10   |  Python  |           |
-|  11.1   |   C++    |           |
-|  11.2   |   C++    |           |
-|  11.3   |   C++    |           |
-|  11.4   |   C++    |           |
-|  11.5   |   C++    |           |
-|  11.6   |   C++    |           |
+|  11.1   |   N/A    |           |
+|  11.2   |   N/A    |           |
+|  11.3   |   N/A    |           |
+|  11.4   |   N/A    |           |
+|  11.5   |   N/A    |           |
+|  11.6   |   N/A    |           |
 
 ## Week 6 - Object Oriented Design
 
