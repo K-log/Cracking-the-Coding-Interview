@@ -1,0 +1,3 @@
+A single threaded program written only with the C standard libaray crashed at random places when run. Why?
+
+The crashes could be do to uncaught exceptions. As for the randomness, it could be do to improper memory management(like not cleaning up unused objects), or overflow errors.

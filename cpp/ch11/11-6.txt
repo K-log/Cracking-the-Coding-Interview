@@ -1,0 +1,6 @@
+How would you test an ATM in a distributed banking system?
+
+Make sure it correctly handles money transfers.
+Make sure it correctly communicates with servers and other banking systems on the network.
+Make sure it works with odd inputs and produces the right output.
+

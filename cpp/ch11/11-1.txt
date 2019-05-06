@@ -1,0 +1,8 @@
+Find the mistakes:
+
+unsigned int i;
+for (i = 100; i >= 0; --i)
+  printf("%d\n", i);
+
+
+The unsigned int i will cause the program to go on forever.

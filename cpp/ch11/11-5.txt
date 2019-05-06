@@ -1,0 +1,1 @@
+How would you test a pen? Make sure ink comes out when dragged across a surface. Make sure the cap comes on and off as well as stays on when attached. Test to make sure it last a reasonably long time before running out of ink.
