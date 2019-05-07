@@ -2,7 +2,7 @@ CC= gcc
 CXX= g++
 CXXFLAGS= --std=c++11
 
-all: clean RouteBetween.o MinTree.o ListOfDepth.o CheckBalanced.o
+all: clean RouteBetween.o MinTree.o ListOfDepth.o CheckBalanced.o ValidBST.o
 
 RouteBetween.o: ./src/routeBetween.cpp
 	$(CXX) $(CXXFLAGS)  ./src/routeBetween.cpp -o RouteBetween
@@ -15,6 +15,9 @@ ListOfDepth.o: ./src/listOfDepth.cpp
 
 CheckBalanced.o: ./src/checkBalanced.cpp
 	$(CXX) $(CXXFLAGS) ./src/checkBalanced.cpp -o CheckBalanced
+
+ValidBST.o: ./src/validBST.cpp
+	$(CXX) $(CXXFLAGS) ./src/validBST.cpp -o ValidBST
 
 clean:
 	rm -f RouteBetween MinTree ListOfDepth CheckBalanced
