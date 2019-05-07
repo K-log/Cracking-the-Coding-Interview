@@ -1,0 +1,1 @@
+The best way I can think of to load test a webpage without using any test tools would be to find out the bare minimum hardware/network requirements the site needs for one user and then use that to determine the requirement for x users.
