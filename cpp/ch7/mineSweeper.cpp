@@ -63,12 +63,13 @@ class MineSweeper {
             // Display the board
             // Some of these symbols may display differently on different machines
             setlocale( LC_ALL, "en_US.UTF-8" );
-            cout << string(boardSizeDigits, ' ');
+            cout << string(boardSizeDigits+1, ' ');
             for(int x = 0; x < board.size(); x++) {
                 printf("%d ", x);
             }
             printf("\n");
             cout << string(boardSizeDigits, ' ');
+            printf("%lc", 9484);
             for(int x = 0; x < board.size(); x++) {
                 printf("%lc%lc", 9472, 9472);
             }
@@ -80,6 +81,12 @@ class MineSweeper {
                 cout << spaces;
                 printf("%lc", 9474);
                 for(int x = 0; x < board[y].size(); x++) { 
+                    if(gameover) {
+                        board[y][x].hidden = false;
+                        if(board[y][x].isBomb) {
+                            board[y][x].flagged = true;
+                        }
+                    }
                     if(board[y][x].flagged) {
                         printf("%lc ", 9872);
                     } else if(board[y][x].hidden) {
@@ -130,7 +137,7 @@ class MineSweeper {
                             board[y-1][x+1].bombs += 1;
                         } 
                     }
-                    if(x-1 > 0) {
+                    if(x-1 > -1) {
                         // Left
                         board[y][x-1].bombs += 1;
                     } 
@@ -139,7 +146,7 @@ class MineSweeper {
                         board[y][x+1].bombs += 1;
                     } 
                     if(y+1 < board.size()) {
-                        if(x-1 > 0) {
+                        if(x-1 > -1) {
                             // Bottom Left
                             board[y+1][x-1].bombs += 1;
                         }
@@ -173,7 +180,7 @@ class MineSweeper {
             }
 
             if(y-1 > -1){
-                if(x-1 > 0) {
+                if(x-1 > -1) {
                     // Top Left
                     doClick(x-1, y-1);
                 }
@@ -184,7 +191,7 @@ class MineSweeper {
                     doClick(x+1, y-1);
                 } 
             }
-            if(x-1 > 0) {
+            if(x-1 > -1) {
                 // Left
                 doClick(x-1, y);
             } 
@@ -193,7 +200,7 @@ class MineSweeper {
                 doClick(x+1, y);
             } 
             if(y+1 < board.size()) {
-                if(x-1 > 0) {
+                if(x-1 > -1) {
                     // Bottom Left
                     doClick(x-1,  y+1);
                 }
@@ -207,6 +214,8 @@ class MineSweeper {
         }
 
         bool checkWin() {
+            // If the number of hidden tiles matches the number of bombs
+            // then the game is over as any click will have to be on a bomb space.
             if(numHidden == bombs) {
                 return true;
             }
@@ -217,6 +226,9 @@ class MineSweeper {
             system("clear"); 
             display();
             if(gameover) {
+                system("clear"); 
+                display();
+                printf("GAME OVER!\n");
                 return gameover; 
             }
             
@@ -234,7 +246,8 @@ class MineSweeper {
             scanf("%d", &choice);
             if(choice == 2){
                 gameover = true;
-                return gameover;
+                printf("Exiting game!");
+                return checkWin();
             }
             printf("X coord: \n");
             scanf("%d", &x);
