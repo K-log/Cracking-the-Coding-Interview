@@ -62,7 +62,7 @@ class MineSweeper {
         void display() {
             // Display the board
             // Some of these symbols may display differently on different machines
-            setlocale( LC_ALL, "en_US.UTF-8" );
+            setlocale(LC_ALL, "en_US.UTF-8");
             cout << string(boardSizeDigits+1, ' ');
             for(int x = 0; x < board.size(); x++) {
                 printf("%d ", x);
@@ -83,16 +83,15 @@ class MineSweeper {
                 for(int x = 0; x < board[y].size(); x++) { 
                     if(gameover) {
                         board[y][x].hidden = false;
-                        if(board[y][x].isBomb) {
-                            board[y][x].flagged = true;
-                        }
                     }
                     if(board[y][x].flagged) {
                         printf("%lc ", 9872);
-                    } else if(board[y][x].hidden) {
+                    } else if(board[y][x].hidden && !gameover) {
                         printf("%lc ", 9632);          
                     } else if(board[y][x].bombs == 0) {
                         printf("%lc ", 9633);
+                    } else if(board[y][x].isBomb) { 
+                        printf("%lc ", 8727);
                     } else {
                         printf("%d ", board[y][x].bombs);
                     }
@@ -110,19 +109,19 @@ class MineSweeper {
             // Random number/bomb placement generation
             unsigned seed = chrono::system_clock::now().time_since_epoch().count();
             default_random_engine generator(seed);
-            uniform_int_distribution<int> distribution(0,n*n);
+            uniform_int_distribution<int> distribution(0,(n*n)-1);
 
             printf("Generating bombs\n");
 
             for(int i = 0; i < bombs; i++) {
-                int bPlace = distribution(generator);  // generates number in the range 0..n*n
+                int bPlace = distribution(generator);  // generates number in the range 0..n*n-1
                 int y = (int)bPlace/n;
                 int x = bPlace%n;
                 // If the bomb loc is a duplicate then ignore it
                 // Fix this later if possible
                 if(!board[y][x].isBomb){ 
                     board[y][x].isBomb = true;
-                    board[y][x].bombs = 0;
+                    board[y][x].bombs = -10000;
                     
                     // Out of bounds checks
                     if(y-1 > -1){
@@ -225,6 +224,11 @@ class MineSweeper {
         bool turn() {
             system("clear"); 
             display();
+            if(checkWin()) {
+                printf("YOU WIN!\n");
+                return checkWin();
+            }
+
             if(gameover) {
                 system("clear"); 
                 display();
@@ -232,11 +236,6 @@ class MineSweeper {
                 return gameover; 
             }
             
-            if(checkWin()) {
-                printf("YOU WIN!\n");
-                return checkWin();
-            }
-
             printf("Turn: %d | Board size: %d | Bombs: %d\n", turnCount, boardSize, bombs); 
             turnCount++;       
             printf("Flag, Click, or Quit? Please enter 0, 1, or 2: \n");
@@ -254,7 +253,7 @@ class MineSweeper {
             printf("Y coord: \n");
             scanf("%d", &y);
 
-            if(x < 0 || x > boardSize || y < 0 || y > boardSize) {
+            if(x < 0 || x > boardSize-1 || y < 0 || y > boardSize-1) {
                 printf("Coordinates are out of bounds! Try again!\n");
                 return false;
             }
