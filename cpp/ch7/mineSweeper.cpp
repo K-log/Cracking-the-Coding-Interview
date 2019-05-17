@@ -59,6 +59,67 @@ class MineSweeper {
         }
         ~MineSweeper() {}
 
+
+        void createBoard(int n, int bombs) {
+            // Factory Method to create a new gameboard  
+            
+            // O(n^2) Linear for both the fill constructor and resize fill
+            board = vector<vector<tile>>(n, vector<tile>(n, tile()));             
+ 
+            // Random number/bomb placement generation
+            unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+            default_random_engine generator(seed);
+            uniform_int_distribution<int> distribution(0,(n*n)-1);
+
+            printf("Generating bombs\n");
+
+            for(int i = 0; i < bombs; i++) {
+                int bPlace = distribution(generator);  // generates number in the range 0..n*n-1
+                int y = (int)bPlace/n;
+                int x = bPlace%n;
+                // If the bomb loc is a duplicate then ignore it
+                // Fix this later if possible
+                if(!board[y][x].isBomb){ 
+                    board[y][x].isBomb = true;
+                    board[y][x].bombs = -10000;
+                    
+                    // Out of bounds checks
+                    if(y-1 > -1){
+                        if(x-1 > -1) {
+                            // Top Left
+                            board[y-1][x-1].bombs += 1;
+                        }
+                        // Top
+                        board[y-1][x].bombs += 1;
+                        if(x+1 < boardSize) {
+                            // Top Right
+                            board[y-1][x+1].bombs += 1;
+                        } 
+                    }
+                    if(x-1 > -1) {
+                        // Left
+                        board[y][x-1].bombs += 1;
+                    } 
+                    if(x+1 < boardSize) {
+                        // Right
+                        board[y][x+1].bombs += 1;
+                    } 
+                    if(y+1 < boardSize) {
+                        if(x-1 > -1) {
+                            // Bottom Left
+                            board[y+1][x-1].bombs += 1;
+                        }
+                        // Bottom 
+                        board[y+1][x].bombs += 1; 
+                        if(x+1 < boardSize) {
+                            // Bottom Right
+                            board[y+1][x+1].bombs += 1;
+                        }     
+                    }
+                }
+            }
+        }
+
         void display() {
             // Display the board
             // Some of these symbols may display differently on different machines
@@ -100,65 +161,6 @@ class MineSweeper {
             }
         }
 
-        void createBoard(int n, int bombs) {
-            // Factory Method to create a new gameboard  
-            
-            // O(n^2) Linear for both the fill constructor and resize fill
-            board = vector<vector<tile>>(n, vector<tile>(n, tile()));             
- 
-            // Random number/bomb placement generation
-            unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-            default_random_engine generator(seed);
-            uniform_int_distribution<int> distribution(0,(n*n)-1);
-
-            printf("Generating bombs\n");
-
-            for(int i = 0; i < bombs; i++) {
-                int bPlace = distribution(generator);  // generates number in the range 0..n*n-1
-                int y = (int)bPlace/n;
-                int x = bPlace%n;
-                // If the bomb loc is a duplicate then ignore it
-                // Fix this later if possible
-                if(!board[y][x].isBomb){ 
-                    board[y][x].isBomb = true;
-                    board[y][x].bombs = -10000;
-                    
-                    // Out of bounds checks
-                    if(y-1 > -1){
-                        if(x-1 > 0) {
-                            // Top Left
-                            board[y-1][x-1].bombs += 1;
-                        }
-                        // Top
-                        board[y-1][x].bombs += 1;
-                        if(x+1 < board.size()) {
-                            // Top Right
-                            board[y-1][x+1].bombs += 1;
-                        } 
-                    }
-                    if(x-1 > -1) {
-                        // Left
-                        board[y][x-1].bombs += 1;
-                    } 
-                    if(x+1 < board[y].size()) {
-                        // Right
-                        board[y][x+1].bombs += 1;
-                    } 
-                    if(y+1 < board.size()) {
-                        if(x-1 > -1) {
-                            // Bottom Left
-                            board[y+1][x-1].bombs += 1;
-                        }
-                        // Bottom 
-                        board[y+1][x].bombs += 1; 
-                        if(x+1 < board[x].size()) {
-                            // Bottom Right
-                            board[y+1][x+1].bombs += 1;
-                        }     
-                    }
-                }
-            }
-        }
 
         void doClick(int x, int y) {
             // Out of bounds checks
@@ -185,7 +187,7 @@ class MineSweeper {
                 }
                 // Top
                     doClick(x, y-1);
-                if(x+1 < board.size()) {
+                if(x+1 < boardSize) {
                     // Top Right
                     doClick(x+1, y-1);
                 } 
@@ -194,18 +196,18 @@ class MineSweeper {
                 // Left
                 doClick(x-1, y);
             } 
-            if(x+1 < board[y].size()) {
+            if(x+1 < boardSize) {
                 // Right
                 doClick(x+1, y);
             } 
-            if(y+1 < board.size()) {
+            if(y+1 < boardSize) {
                 if(x-1 > -1) {
                     // Bottom Left
                     doClick(x-1,  y+1);
                 }
                 // Bottom 
                 doClick(x, y+1); 
-                if(x+1 < board[x].size()) {
+                if(x+1 < boardSize) {
                     // Bottom Right
                     doClick(x+1, y+1);
                 }     
@@ -225,6 +227,8 @@ class MineSweeper {
             system("clear"); 
             display();
             if(checkWin()) {
+                system("clear");
+                display();
                 printf("YOU WIN!\n");
                 return checkWin();
             }
@@ -246,7 +250,7 @@ class MineSweeper {
             if(choice == 2){
                 gameover = true;
                 printf("Exiting game!");
-                return checkWin();
+                return gameover;
             }
             printf("X coord: \n");
             scanf("%d", &x);
@@ -282,10 +286,11 @@ int main() {
         printf("Too many bombs. Try again: \n");
         scanf("%d", &b);
     }
+    // Create the game instance
     MineSweeper game(n, b);
-    bool gameover = game.turn();
-    while(!gameover) {
-        gameover = game.turn();
-    }
+
+    // Run the game
+    while(!game.turn()); 
+    
     return 1;
 }
