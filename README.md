@@ -67,18 +67,18 @@
 
 | Problem | Language | Completed |
 | :-----: | :------: | :-------: |
-|   7.1   |   C++    |           |
-|   7.2   |   C++    |           |
-|   7.3   |   C++    |           |
-|   7.4   |   C++    |           |
-|   7.5   |   C++    |           |
-|   7.6   |   C++    |           |
-|   7.7   |   C++    |           |
-|   7.8   |   C++    |           |
-|   7.9   |   C++    |           |
-|  7.10   |   C++    |           |
-|  7.11   |   C++    |           |
-|  7.12   |   C++    |           |
+|   7.1   |   C++    |   Done    |
+|   7.2   |   C++    |   Done    |
+|   7.3   |   C++    |   Done    |
+|   7.4   |   C++    |   Skip    |
+|   7.5   |   C++    |   Skip    |
+|   7.6   |   C++    |   Skip    |
+|   7.7   |   C++    |   Skip    |
+|   7.8   |   C++    |   Skip    |
+|   7.9   |   C++    |   Skip    |
+|  7.10   |   C++    |   Skip    |
+|  7.11   |   C++    |   Skip    |
+|  7.12   |   C++    |   Done    |
 
 ## Week 7 - System Design and Scalability and Databases
 
