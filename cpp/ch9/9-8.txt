@@ -1,0 +1,6 @@
+How you you design a system like pastbin where a user enters a piece of text and get a generated link to it.
+
+Create a website that gives users access to a text box. 
+Upon submitting their text, the system generates a hash of the text which then becomes part of the URL.
+Because users are anonymous, and cannot change text attached to a URL once it is created, duplicate entries would have the same URL.
+This would help save on storage space although it would need to be changed if entries were attached to a username or were editable.

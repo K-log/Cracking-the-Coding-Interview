@@ -1,0 +1,7 @@
+Design a caching system to help avoid using a very costly processSearch() function.
+
+
+After every search, store the result in the cache. When processSearch() is called, call the cache function first.
+The cache function will check if the search already exists and if so, return that result or null.
+If the cache function returns null, processSearch() will continue as normal.
+Otherwise it will return the result of the cache function.
