@@ -84,26 +84,26 @@
 
 | Problem | Language | Completed |
 | :-----: | :------: | :-------: |
-|   9.1   |  Python  |           |
-|   9.2   |  Python  |           |
-|   9.3   |  Python  |           |
-|   9.4   |  Python  |           |
-|   9.5   |  Python  |           |
-|   9.6   |  Python  |           |
-|   9.7   |  Python  |           |
-|   9.8   |  Python  |           |
-|   9.9   |  Python  |           |
-|  14.1   |   SQL    |           |
-|  14.2   |   SQL    |           |
-|  14.3   |   SQL    |           |
-|  14.4   |   SQL    |           |
-|  14.5   |   SQL    |           |
-|  14.6   |   SQL    |           |
-|  14.7   |   SQL    |           |
-|  14.8   |   SQL    |           |
-|  14.9   |   SQL    |           |
-|  14.10  |   SQL    |           |
-|  14.11  |   SQL    |           |
+|   9.1   |   N/A    |   Skip    |
+|   9.2   |   N/A    |   Skip    |
+|   9.3   |   N/A    |   Skip    |
+|   9.4   |   N/A    |   Skip    |
+|   9.5   |   N/A    |   Done    |
+|   9.6   |   N/A    |   Skip    |
+|   9.7   |   N/A    |   Skip    |
+|   9.8   |   N/A    |   Done    |
+|   9.9   |   N/A    |   Skip    |
+|  14.1   |   SQL    |   Done    |
+|  14.2   |   SQL    |   Done    |
+|  14.3   |   SQL    |   Done    |
+|  14.4   |   N/A    |   Done    |
+|  14.5   |   N/A    |   Done    |
+|  14.6   |   N/A    |   Skip    |
+|  14.7   |   N/A    |   Skip    |
+|  14.8   |   N/A    |   Skip    |
+|  14.9   |   N/A    |   Skip    |
+|  14.10  |   N/A    |   Skip    |
+|  14.11  |   N/A    |   Skip    |
 
 ## Week 8 - Sorting and Searching
 

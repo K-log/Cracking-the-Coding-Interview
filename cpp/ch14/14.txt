@@ -16,6 +16,8 @@ AND a.AptID = (SELECT AptID
                 FROM Requests 
                 WHERE Status = "Open");
 
+
+
 14.3 Close all requests for building #11
 
 UPDATE Requests 
@@ -23,16 +25,3 @@ SET Status = "Closed"
 WHERE AptID = (SELECT AptID 
                FROM Apartments
                WHERE BuildingID = 11);
-
-
-
-
-14.4 What is the difference between the different types of joins?
-	-- Taken from w3schools.com --
-    (INNER) JOIN: Returns records that have matching values in both tables
-    LEFT (OUTER) JOIN: Return all records from the left table, and the matched records from the right table
-    RIGHT (OUTER) JOIN: Return all records from the right table, and the matched records from the left table
-    FULL (OUTER) JOIN: Return all records when there is a match in either left or right table
-
-14.5 What is denormalization?
-	The process of optimizing read performance on a database at the cost of write performance. By creating redundant data or grouping it together it can make it fast to access this data especially in very large databases.
